@@ -1,8 +1,14 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { GameControllerContext, PlayerControllerContext } from '../../stores/storesContext';
+import Deck from '../deck/deck';
 
 const Board = (): React.ReactElement => {
+  const gameController = useContext(GameControllerContext);
+  const playerController = useContext(PlayerControllerContext);
+
   return <BoardWrapper></BoardWrapper>;
 };
 

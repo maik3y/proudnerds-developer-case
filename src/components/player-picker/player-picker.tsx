@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import './player-picker.scss';
-import { gameControllerContext } from '../../stores/storesContext';
+import { GameControllerContext, PlayerControllerContext } from '../../stores/storesContext';
 import { observer } from 'mobx-react';
+import { useContext } from 'react';
+import PlayerController from '../../controllers/playerController';
 
 interface FormValues {
   player1: string;
@@ -14,11 +16,16 @@ interface FormValues {
 }
 
 const PlayerPicker = (): React.ReactElement => {
-  const gameController = React.useContext(gameControllerContext);
+  const gameController = useContext(GameControllerContext);
+  const playerController = useContext(PlayerControllerContext);
   const formik = useFormik({
     initialValues: { player1: '', player2: '', player3: '', player4: '' },
     onSubmit: (values: FormValues) => {
       // alert(JSON.stringify(values, null, 2));
+      playerController.addPlayer(values.player1);
+      playerController.addPlayer(values.player2);
+      playerController.addPlayer(values.player3);
+      playerController.addPlayer(values.player4);
       gameController.startGame();
     },
   });
