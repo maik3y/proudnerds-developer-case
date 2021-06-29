@@ -3,14 +3,23 @@ import styled from 'styled-components';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 import './player-picker.scss';
+import { gameControllerContext } from '../../stores/storesContext';
+import { observer } from 'mobx-react';
 
-const submit = (): void => {};
+interface FormValues {
+  player1: string;
+  player2: string;
+  player3: string;
+  player4: string;
+}
 
 const PlayerPicker = (): React.ReactElement => {
+  const gameController = React.useContext(gameControllerContext);
   const formik = useFormik({
     initialValues: { player1: '', player2: '', player3: '', player4: '' },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: FormValues) => {
+      // alert(JSON.stringify(values, null, 2));
+      gameController.startGame();
     },
   });
 
@@ -49,7 +58,6 @@ const PlayerPicker = (): React.ReactElement => {
           value={formik.values.player2}
           onChange={formik.handleChange}
           autoComplete="player2"
-          autoFocus
         />
         <TextField
           variant="outlined"
@@ -62,7 +70,6 @@ const PlayerPicker = (): React.ReactElement => {
           value={formik.values.player3}
           onChange={formik.handleChange}
           autoComplete="player3"
-          autoFocus
         />
         <TextField
           variant="outlined"
@@ -75,7 +82,6 @@ const PlayerPicker = (): React.ReactElement => {
           value={formik.values.player4}
           onChange={formik.handleChange}
           autoComplete="player4"
-          autoFocus
         />
         <ButtonWrapper>
           <Button variant="contained">Random opponents</Button>
@@ -88,7 +94,7 @@ const PlayerPicker = (): React.ReactElement => {
   );
 };
 
-export default PlayerPicker;
+export default observer(PlayerPicker);
 
 const PlayerPickerHeader = styled.div`
   display: flex;

@@ -1,17 +1,8 @@
+import { observer } from 'mobx-react';
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface BoardProps {
-  players: {
-    player1: string;
-    player2: string;
-    player3: string;
-    player4: string;
-  };
-}
-
-const Board = ({ players }: BoardProps): React.ReactElement => {
-  const player1 = React.useState('');
+const Board = (): React.ReactElement => {
   return <BoardWrapper></BoardWrapper>;
 };
 
@@ -24,4 +15,4 @@ const BoardWrapper = styled.div`
   background-size: cover;
 `;
 
-export default Board;
+export default observer(Board);
