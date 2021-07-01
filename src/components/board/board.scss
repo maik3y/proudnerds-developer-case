@@ -1,0 +1,260 @@
+@import '../../styles/mixins.scss';
+
+.board {
+  @include flex(column wrap);
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  &__header {
+    @include flex(row wrap, space-between);
+    width: 100%;
+    height: 7.5%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.25);
+
+    &__actions {
+      @include flex(row wrap, flex-start);
+
+      & > button {
+        margin: 0 0.25rem;
+      }
+    }
+  }
+
+  &__content {
+    width: 100%;
+    height: 92.5%;
+    position: relative;
+  }
+
+  &__player {
+    @include flex(column wrap, center);
+    position: absolute;
+
+    &:nth-child(1) {
+      top: calc(1rem);
+      left: calc(50% - 37.5rem / 2);
+      transform: rotate(180deg);
+    }
+
+    &:nth-child(2) {
+      top: calc(50% - 6rem);
+      right: -10rem;
+      transform: rotate(270deg);
+    }
+
+    &:nth-child(3) {
+      bottom: calc(1rem);
+      left: calc(50% - 37.5rem / 2);
+    }
+
+    &:nth-child(4) {
+      top: calc(50% - 6rem);
+      left: -10rem;
+      transform: rotate(90deg);
+    }
+
+    &__info {
+      @include flex(row wrap, center);
+      margin-bottom: 0.5rem;
+
+      &__name {
+        @include flex;
+
+        text-align: center;
+        align-self: center;
+        background: inherit;
+        color: white;
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .cardwrapper {
+    @include flex(row wrap, center);
+    align-self: center;
+
+    // color: white;
+    width: 37.5rem;
+    padding: 0 0 0 4rem;
+  }
+
+  .decks {
+    @include flex(row wrap, center);
+
+    position: absolute;
+    top: calc(50% - 10rem / 2);
+    left: calc(50% - 20rem / 2);
+    width: 20rem;
+    height: 10rem;
+  }
+}
+
+.card {
+  @include flex(column wrap, center);
+  align-self: center;
+
+  width: 6.5rem;
+  height: 9.5rem;
+  background-size: contain !important;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 2px 2px 5px #212121;
+    transition: all 0.1s ease-out;
+  }
+
+  &__amount {
+    align-self: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  &--player-card {
+    margin-left: -4rem;
+  }
+
+  &--drawpile-card {
+    margin: 0 0.5rem;
+  }
+}
+
+/*
+ * Tablet landscape 
+ */
+@media (max-width: 1024px), (max-device-width: 1024px), (min-device-width: 1024px) and (max-width: 1024px) {
+  .board {
+    .cardwrapper {
+      width: 25rem;
+    }
+
+    &__player:nth-child(1) {
+      left: calc(50% - 25rem / 2);
+    }
+    &__player:nth-child(3) {
+      left: calc(50% - 25rem / 2);
+    }
+    &__player:nth-child(2),
+    &__player:nth-child(4) {
+      top: calc(50% - 5rem);
+    }
+  }
+
+  .card {
+    width: 5.5rem;
+    height: 7.5rem;
+  }
+}
+/*
+ * Tablet portrait 
+ */
+@media (max-device-width: 1023px) and (orientation: portrait),
+  (max-device-width: 767px) and (orientation: landscape),
+  (min-device-width: 1024px) and (max-width: 979px),
+  (min-device-width: 1024px) and (max-width: 980px) and (orientation: portrait),
+  (max-width: 767px) {
+  .board {
+    &__player {
+      &:nth-child(2) {
+        right: -5rem;
+      }
+      &:nth-child(4) {
+        left: -5rem;
+      }
+    }
+  }
+}
+
+/*
+ * Mobile landscape 
+ */
+@media (max-device-width: 767px) and (orientation: portrait),
+  (max-device-width: 499px) and (orientation: landscape),
+  (max-width: 767px) {
+  .board {
+    &__header {
+      height: 12.5%;
+      padding: 0.5rem;
+
+      &__actions {
+        max-height: 100%;
+      }
+    }
+
+    &__content {
+      @include flex();
+      height: 87.5%;
+    }
+
+    &__player {
+      position: relative;
+      width: 50%;
+      margin: 0 !important;
+      padding: 0.25rem !important;
+      top: initial !important;
+      right: initial !important;
+      bottom: initial !important;
+      left: initial !important;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        justify-content: flex-start;
+        transform: rotate(0);
+      }
+      &:nth-child(3),
+      &:nth-child(4) {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        transform: rotate(0);
+      }
+
+      .cardwrapper {
+        width: 100%;
+        padding: 0 0 0 2rem;
+      }
+    }
+
+    .card {
+      width: 3.25rem;
+      height: 4.75rem;
+
+      &__amount {
+        font-size: 2rem;
+      }
+
+      &--player-card {
+        margin-left: -2rem;
+      }
+    }
+  }
+}
+
+/*
+ * Mobiel portrait 
+ */
+@media (max-device-width: 499px) and (orientation: portrait), (max-width: 499px) {
+  .board {
+    &__header {
+      height: 15%;
+
+      &__actions {
+        max-height: 45%;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    &__content {
+      height: 85%;
+    }
+
+    &__player {
+      &__info {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}

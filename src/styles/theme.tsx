@@ -1,19 +1,28 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import { amber, yellow, red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: green[800],
+      main: yellow[600],
     },
-    success: {
-      main: green[500],
+    secondary: {
+      main: red[500],
     },
   },
   typography: {
     h1: {
       fontSize: '2rem',
       fontWeight: 'bold',
+    },
+    h2: {
+      fontSize: '1.6rem',
+      fontWeight: 'bold',
+      color: amber[500],
+    },
+    body1: {
+      fontSize: '1.4rem',
+      color: '#ffffff',
     },
     fontFamily: [
       '-apple-system',

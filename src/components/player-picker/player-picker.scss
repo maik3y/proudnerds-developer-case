@@ -1,5 +1,49 @@
-.player-picker {
-  padding: 20px;
-  background: white;
-  border-radius: 5px;
+@import '../../styles/mixins.scss';
+
+.playerpicker {
+  @include flex(column wrap, center);
+  max-width: 400px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  &__header {
+    @include flex(column wrap, center);
+    color: white;
+  }
+
+  &__wrapper {
+    padding: 20px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+  }
+
+  &__actions {
+    @include flex(row wrap, flex-end);
+    margin-top: 10px;
+  }
+}
+
+/*
+ * Mobile landscape 
+ */
+@media (max-device-width: 767px) and (orientation: portrait),
+  (max-device-width: 499px) and (orientation: landscape),
+  (max-width: 767px) {
+  .playerpicker {
+    padding: 0;
+    max-width: 350px;
+
+    &__header {
+      .MuiTypography-gutterBottom {
+        margin-bottom: 5px;
+      }
+    }
+    &__wrapper {
+      padding: 0.8rem 2rem;
+
+      label + .MuiInput-formControl {
+        margin-top: 5px;
+      }
+    }
+  }
 }
