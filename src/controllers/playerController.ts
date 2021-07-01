@@ -1,10 +1,5 @@
-import { action, computed, makeObservable, observable } from "mobx";
-import Card from "../components/deck/card";
-
-interface Player {
-  name: string;
-  cards?: Card[];
-}
+import { action, makeObservable, observable } from "mobx";
+import Player from "../stores/playerStore";
 
 export default class PlayerController {
   
@@ -20,8 +15,29 @@ export default class PlayerController {
     return this._players;
   }
 
+  /*
+   * Create a new player
+   */
   @action
-  public addPlayer(name: string):void {
-    this.players.push({name: name});
+  public newPlayer(name: string): void {
+    this._players.push(new Player(name));
+  }
+
+  /*
+   * Clears cards from each players hand
+   */
+  @action
+  public clearHands(): void {
+    this._players.forEach((player: Player): void=>{
+      player.clearHand();
+    });
+  }
+
+  /*
+   * Gets winner
+   */
+  @action
+  public getWinner(): Player | undefined {
+    return this.players.find(player => player.isWinner === true);
   }
 }

@@ -4,11 +4,8 @@
       "plugin:react/recommended",
       "plugin:jest/recommended",
       "plugin:@typescript-eslint/recommended",
-      "prettier",
-      "prettier/react",
-      "prettier/@typescript-eslint"
     ],
-    "plugins": ["@typescript-eslint", "react", "jest", "prettier"],
+    "plugins": ["@typescript-eslint", "react", "jest"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "sourceType": "module",
@@ -17,7 +14,6 @@
       }
     },
     "rules": {
-      "prettier/prettier": "off",
       "@typescript-eslint/interface-name-prefix": "off",
       "react/no-unescaped-entities": "warn"
     },
